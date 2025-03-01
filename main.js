@@ -1,4 +1,5 @@
 
+
 const http = require("http");
 const express = require("express");
 const app = express();
@@ -69,23 +70,23 @@ wss.on("connection", function (ws, req) {
     if (messageObj.action === "displayImage") {
       const code = typeof messageObj.code !== "undefined" ? messageObj.code : 1;
       console.log(`Received displayImage with code ${code}`);
-      oscClient.send("/code", code, (err) => {
+      oscClient.send("/code/section", code, (err) => {
         if (err) console.error("Error sending OSC message:", err);
-        else console.log(`OSC message sent: /code ${code}`);
+        else console.log(`OSC message sent: /code/section ${code}`);
       });
     } else if (messageObj.action === "incorrect") {
       const code = typeof messageObj.code !== "undefined" ? messageObj.code : 0;
       console.log(`Received incorrect with code ${code}`);
-      oscClient.send("/code", code, (err) => {
+      oscClient.send("/code/incorrect", code, (err) => {
         if (err) console.error("Error sending OSC message:", err);
-        else console.log(`OSC message sent: /code ${code}`);
+        else console.log(`OSC message sent: /code/incorrect ${code}`);
       });
     } else if (messageObj.action === "gameOver") {
       const code = typeof messageObj.code !== "undefined" ? messageObj.code : 0;
       console.log(`Received gameOver with code ${code}`);
-      oscClient.send("/code", code, (err) => {
+      oscClient.send("/code/gameOver", code, (err) => {
         if (err) console.error("Error sending OSC gameOver message:", err);
-        else console.log(`OSC gameOver message sent: /code ${code}`);
+        else console.log(`OSC gameOver message sent: /code/gameOver ${code}`);
       });
     }
     
